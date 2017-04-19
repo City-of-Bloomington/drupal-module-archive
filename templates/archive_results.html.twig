@@ -11,5 +11,9 @@
  */
 #}
 <section>
-{{ results }}
+    <header>
+        <h2>{{ year }}{{ start|date('F') }}</h2>
+    </header>
+    {{ form }}
+    {{ results }}
 </section>
