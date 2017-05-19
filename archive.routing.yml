@@ -1,13 +1,11 @@
 ---
-archive.archive:
-  path: '/archive/{year}/{month}'
+archive.settings:
+  path: '/admin/config/archive/settings'
   defaults:
-    _controller: '\Drupal\archive\Controller\ArchiveController::archive'
-    _title: 'Archive'
-    year:  0
-    month: 0
+    _form: '\Drupal\archive\Form\SettingsForm'
+    _title: 'Archive Settings'
   requirements:
-    _permission: 'access content'
-    year:  '\d+'
-    month: '\d+'
+    _permission: 'administer site configuration'
+route_callbacks:
+  - '\Drupal\archive\Routing\ArchiveRoutes::routes'
 ...
