@@ -38,23 +38,22 @@ class ArchiveController extends ControllerBase
 
         $manager = \Drupal::entityTypeManager();
         $query   = \Drupal::entityQuery('node')
-                 ->condition('type',    'news_release')
+                 ->condition('type',    $type)
                  ->condition('created', $start->format('U'), '>=')
                  ->condition('created', $end  ->format('U'), '<')
                  ->condition('status',  1);
 
-        #$form_state = new FormState();
-        #$form_state->setAlwaysProcess(true);
-        #$form_state->setRebuild(true);
-        #$form_state->set('year',  $year);
-        #$form_state->set('month', $month);
-        #$form = \Drupal::formBuilder()->buildForm('Drupal\archive\Form\YearMonthForm', $form_state);
+        $form_state = new FormState();
+        $form_state->setValue('type',  $type);
+        $form_state->setValue('year',  $year);
+        $form_state->setValue('month', $month);
+        $form = \Drupal::formBuilder()->buildForm('Drupal\archive\Form\DateForm', $form_state);
 
         return [
             '#theme'   => 'archive_results',
             '#year'    => $year,
             '#start'   => $start,
-            '#form'    => null,
+            '#form'    => $form,
             '#results' => $manager->getViewBuilder('node')->viewMultiple(
                               $manager->getStorage('node')->loadMultiple($query->execute()),
                               'teaser'
