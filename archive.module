@@ -28,6 +28,7 @@ function archive_theme()
             'template' => 'archive_results',
             'variables' => [
                 'year'    => null,
+                'month'   => null,
                 'start'   => null,
                 'form'    => null,
                 'results' => [],

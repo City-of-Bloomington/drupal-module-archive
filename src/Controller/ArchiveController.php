@@ -10,6 +10,13 @@ use Drupal\Core\Form\FormState;
 
 class ArchiveController extends ControllerBase
 {
+    /**
+     * @param  string $type
+     * @param  int    $year
+     * @param  int    $month
+     * @param  int    $day
+     * @return array
+     */
     public function archive($type, $year, $month, $day)
     {
         $year  = (int)$year;
@@ -41,7 +48,8 @@ class ArchiveController extends ControllerBase
                  ->condition('type',    $type)
                  ->condition('created', $start->format('U'), '>=')
                  ->condition('created', $end  ->format('U'), '<')
-                 ->condition('status',  1);
+                 ->condition('status',  1)
+                 ->sort('created', 'desc');
 
         $form_state = new FormState();
         $form_state->setValue('type',  $type);
@@ -52,6 +60,7 @@ class ArchiveController extends ControllerBase
         return [
             '#theme'   => 'archive_results',
             '#year'    => $year,
+            '#month'   => $month,
             '#start'   => $start,
             '#form'    => $form,
             '#results' => $manager->getViewBuilder('node')->viewMultiple(
