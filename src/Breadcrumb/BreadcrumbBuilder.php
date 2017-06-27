@@ -14,14 +14,20 @@ class BreadcrumbBuilder implements BreadcrumbBuilderInterface
 {
     public function applies(RouteMatchInterface $route_match)
     {
-        $name = explode('.', $route_match->getRouteName());
-        if ($name[0]=='archive' && $name[1]!='settings') { return true; }
+        $route_name = $route_match->getRouteName();
 
-        $node = $route_match->getParameter('node');
-        if ($node) {
-            $config  = \Drupal::config('archive.settings');
-            $types   = $config->get('archive_types');
-            return (in_array($node->getType(), $config->get('archive_types')));
+        $name = explode('.', $route_name);
+        if ($name[0]=='archive' && $name[1]!='settings') {
+            return true;
+        }
+
+        if ($route_name == 'entity.node.canonical') {
+            $node = $route_match->getParameter('node');
+            if ($node) {
+                $config  = \Drupal::config('archive.settings');
+                $types   = $config->get('archive_types');
+                return (in_array($node->getType(), $config->get('archive_types')));
+            }
         }
     }
 
