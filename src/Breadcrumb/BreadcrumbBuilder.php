@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright 2017 City of Bloomington, Indiana
+ * @copyright 2017-2018 City of Bloomington, Indiana
  * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
  */
 namespace Drupal\archive\Breadcrumb;
@@ -23,9 +23,8 @@ class BreadcrumbBuilder implements BreadcrumbBuilderInterface
 
         if ($route_name == 'entity.node.canonical') {
             $node = $route_match->getParameter('node');
-            if ($node) {
+            if (is_a($node, '\Drupal\node\Entity\Node')) {
                 $config  = \Drupal::config('archive.settings');
-                $types   = $config->get('archive_types');
                 return (in_array($node->getType(), $config->get('archive_types')));
             }
         }
@@ -62,7 +61,7 @@ class BreadcrumbBuilder implements BreadcrumbBuilderInterface
         if ($year) {
             $breadcrumb->addLink(Link::createFromRoute($year, "archive.$type", ['type'=>$type, 'year'=>$year]));
             if ($month) {
-                $monthName = $created ? date('F', $created) : date('F', strtotime("2017-$month-1"));
+                $monthName = isset($created) ? date('F', $created) : date('F', strtotime("2017-$month-1"));
                 $breadcrumb->addLink(Link::createFromRoute($monthName, "archive.$type", ['type'=>$type, 'year'=>$year, 'month'=>$month]));
                 if ($day) {
                     $breadcrumb->addLink(Link::createFromRoute($day, "archive.$type", ['type'=>$type, 'year'=>$year, 'month'=>$month, 'day'=>$day]));
