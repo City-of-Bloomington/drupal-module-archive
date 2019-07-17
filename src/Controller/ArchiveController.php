@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright 2017 City of Bloomington, Indiana
- * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
+ * @copyright 2017-2019 City of Bloomington, Indiana
+ * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE
  */
 namespace Drupal\archive\Controller;
 
@@ -63,6 +63,7 @@ class ArchiveController extends ControllerBase
             '#month'   => $month,
             '#start'   => $start,
             '#form'    => $form,
+            '#type'    => $type,
             '#results' => $manager->getViewBuilder('node')->viewMultiple(
                               $manager->getStorage('node')->loadMultiple($query->execute()),
                               'teaser'

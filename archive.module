@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright 2017 City of Bloomington, Indiana
- * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
+ * @copyright 2017-2019 City of Bloomington, Indiana
+ * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE
  */
 use Drupal\Core\Routing\RouteMatchInterface;
 
@@ -31,6 +31,7 @@ function archive_theme()
                 'month'   => null,
                 'start'   => null,
                 'form'    => null,
+                'type'    => null, // Node type
                 'results' => [],
             ]
         ]
