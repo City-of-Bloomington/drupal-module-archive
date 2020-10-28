@@ -1,8 +1,9 @@
 ---
-name: Archive
-description: Displays nodes filtered by year and month
-package: COB
-type: module
-core: 8.x
-configure: archive.settings
+name:        'Archive'
+description: 'Displays nodes filtered by year and month'
+package:     'COB'
+type:        'module'
+core:        '8.x'
+configure:   'archive.settings'
+core_version_requirement: '^8||^9'
 ...
