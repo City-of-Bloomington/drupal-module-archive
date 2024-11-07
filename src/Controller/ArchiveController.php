@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright 2017-2019 City of Bloomington, Indiana
+ * @copyright 2017-2024 City of Bloomington, Indiana
  * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE
  */
 namespace Drupal\archive\Controller;
@@ -45,6 +45,7 @@ class ArchiveController extends ControllerBase
 
         $manager = \Drupal::entityTypeManager();
         $query   = \Drupal::entityQuery('node')
+                 ->accessCheck(true),
                  ->condition('type',    $type)
                  ->condition('created', $start->format('U'), '>=')
                  ->condition('created', $end  ->format('U'), '<')
