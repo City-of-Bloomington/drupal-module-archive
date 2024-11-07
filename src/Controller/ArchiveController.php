@@ -45,7 +45,7 @@ class ArchiveController extends ControllerBase
 
         $manager = \Drupal::entityTypeManager();
         $query   = \Drupal::entityQuery('node')
-                 ->accessCheck(true),
+                 ->accessCheck(true)
                  ->condition('type',    $type)
                  ->condition('created', $start->format('U'), '>=')
                  ->condition('created', $end  ->format('U'), '<')
